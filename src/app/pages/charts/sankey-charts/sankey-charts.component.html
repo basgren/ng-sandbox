@@ -1,1 +1,8 @@
-<p>sankey-charts works!</p>
+<app-sankey-chart
+  [data]="sankeyDefs"
+  (selectionChange)="selection = $event"
+></app-sankey-chart>
+
+<div class="selected">
+  Selected: {{selection | json}}
+</div>

@@ -1,0 +1,146 @@
+.sankey {
+    $hover-animation-duration: 250ms;
+    $edge-opacity: .3;
+    $edge-hover-opacity: .6;
+    $highlight-darken-percent: 15%;
+
+    .edge {
+        fill: none;
+        stroke: #388bca;
+        stroke-opacity: $edge-opacity;
+        transition: stroke-opacity $hover-animation-duration, stroke $hover-animation-duration;
+    }
+
+    .edge:hover, .edge--hovered {
+        cursor: pointer;
+        stroke-opacity: $edge-hover-opacity;
+    }
+
+    .node {
+        // Fill should be applied both to node rect and node label
+        fill: #388bca;
+    }
+
+    .node-rect {
+        stroke: none;
+        transition: fill $hover-animation-duration;
+    }
+
+    // --- Hover areas ---
+    // Hover areas are used to increase areas which react on mouse events for very thin flows.
+    .hover-area {
+        opacity: 0;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &--edge {
+            fill: none;
+
+            // Important to set stroke, otherwise edge area represented by <path> element won't react on mouse events
+            stroke: red;
+        }
+    }
+
+    // --- Labels ---
+
+    .node-label {
+        pointer-events: none;
+        font-weight: 600;
+        transition: fill $hover-animation-duration;
+    }
+
+    /*
+    * Styles for basic sankey diagram
+    */
+    &-basic {
+        $base-node-color: #7AC5E9;
+        $selected-color: #ed8239;
+        $alt-node-color: #9fca78;
+        $gray-element-color: #b9b9b9;
+        // $uc-element-color: #e2001a;
+        // $uc-element-color: #3db049;
+        $uc-element-color: #b877ac;
+
+        .node {
+            // Default node style
+            fill: $base-node-color;
+
+            &.node--unapproved {
+                fill: $gray-element-color;
+            }
+
+            &.node--uc {
+                fill: $uc-element-color;
+            }
+
+            &.node--hovered {
+                cursor: pointer;
+                fill: darken($base-node-color, $highlight-darken-percent);
+
+                &.node--unapproved {
+                    fill: darken($gray-element-color, $highlight-darken-percent);
+                }
+
+                &.node--uc {
+                    fill: darken($uc-element-color, $highlight-darken-percent);
+                }
+
+                &.node--selected {
+                    fill: darken($selected-color, $highlight-darken-percent);
+                }
+            }
+
+            &.node--selected {
+                fill: $selected-color;
+            }
+        }
+
+        .edge--unapproved {
+            stroke: $gray-element-color;
+        }
+
+        .edge--opportunity {
+            stroke: $alt-node-color;
+        }
+
+        .edge--selected {
+            stroke: $selected-color;
+            stroke-opacity: 0.5;
+        }
+
+        // --- Level labels ---
+
+        .level-label {
+            font-weight: 600;
+        }
+
+        // --- Legend ---
+        .sankey-legend-item {
+            &--gray {
+                fill: $gray-element-color;
+                opacity: $edge-opacity;
+            }
+
+            &--uc {
+                fill: $uc-element-color;
+            }
+
+            &--non-uc {
+                fill: $gray-element-color;
+            }
+
+            &--green {
+                fill: $alt-node-color;
+                opacity: $edge-opacity;
+            }
+
+            &__label {
+                fill: #aeaeae;
+                text-anchor: start;
+                alignment-baseline: central;
+            }
+        }
+    }
+}

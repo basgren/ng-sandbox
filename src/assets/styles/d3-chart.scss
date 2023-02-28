@@ -1,0 +1,149 @@
+$color-selection: #ed8239;
+$color-point-default: #3789c8;
+
+.d3-chart-svg {
+    display: block;
+}
+
+.chart--full-width-ticks {
+    .axis-y, .axis-x {
+        .tick line {
+            opacity: 0.2;
+        }
+
+        .domain {
+            display: none;
+        }
+    }
+}
+
+.d3-chart {
+    $font-size-point-labels: 12px;
+
+    .chart-line {
+        fill: none;
+        stroke: $color-point-default;
+        stroke-width: 3;
+        stroke-linejoin: round;
+        stroke-linecap: round;
+    }
+
+    .chart-area {
+        opacity: 0.5;
+    }
+
+    .chart-point {
+        fill: $color-point-default;
+    }
+
+    .column {
+        fill: $color-point-default;
+    }
+
+    .column-label {
+        text-anchor: middle;
+        font-size: $font-size-point-labels;
+        fill: $color-point-default;
+    }
+
+    .bar {
+        fill: $color-point-default;
+    }
+
+    .bar-label {
+        text-anchor: start;
+        font-size: $font-size-point-labels;
+        fill: $color-point-default;
+        dominant-baseline: central;
+
+        &--negative {
+            text-anchor: end;
+        }
+    }
+
+    .selection-area {
+        rect {
+            fill: $color-selection;
+            opacity: 0;
+        }
+
+        line {
+            opacity: 0;
+            stroke: $color-selection;
+            stroke-width: 2;
+            pointer-events: none;
+        }
+
+        &:hover {
+            rect {
+                opacity: 0.2;
+            }
+        }
+
+        &--selected {
+            rect {
+                opacity: 0.3;
+            }
+
+            line {
+                opacity: 0.6;
+            }
+        }
+    }
+
+    // ---=== Legend ===---
+    .legend-item__label {
+        text-anchor: start;
+        alignment-baseline: middle;
+    }
+
+    // ---=== Hover highlighting ===---
+    // Add class `d3-chart--with-hover` to element with `d3-chart` class to enable highlighting of points on hover
+    &--with-hover {
+        .bar-container {
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+    }
+
+    .axis-label {
+        fill: black;
+        opacity: 0.8;
+        text-transform: uppercase;
+    }
+
+}
+
+.d3-chart-tooltip-container {
+    opacity: 0.8;
+    border: 1px solid gray;
+    border-left: 8px solid $color-point-default;
+    padding: 10px;
+    background: white;
+    position: absolute;
+    z-index: 1000;
+    pointer-events: none;
+
+    .tooltip-title {
+        margin: 0 0 8px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+}
+
+// TODO: move to separate file
+.product-tooltip-info {
+    display: flex;
+
+    .tooltip-info-item {
+        &:not(:last-child) {
+            margin-right: 24px;
+        }
+    }
+
+    .tooltip-param {
+        font-weight: 600;
+    }
+}
+
